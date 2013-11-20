@@ -117,15 +117,19 @@ class KnuthSRNG:
 seed = sys.argv[1]
 
 a = iter(KnuthSRNG(seed))
-i = 0
+values = set()
 prev = 0
-while True:
+for i in range(100000):
     val = next(a)
     if val == prev:
         print("converged after {} iterations!".format(i))
         print(val)
         break
-
+    if val in values:
+        print("cycle after {} iterations!".format(i))
+        print(val)
+        break
+    
+    values.add(val)
     prev = val
-    i += 1
 
