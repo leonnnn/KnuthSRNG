@@ -124,7 +124,7 @@ for i in range(100000):
         break
     if val in values:
         print("cycle after {} iterations!".format(i))
-        print(val)
+        print(prev)
         break
     
     values.add(val)
