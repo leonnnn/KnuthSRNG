@@ -43,19 +43,16 @@ class KnuthSRNG:
             self.X += 5000000000
 
         self.next_step = self.K4
-#        self.debug("K3")
 
     def K4(self):
         self.X = int(self.X**2 / 10**5) % 10**10
 
         self.next_step = self.K5
-#        self.debug("K4")
 
     def K5(self):
         self.X = (self.X * 1001001001) % 10**10
 
         self.next_step = self.K6
-#        self.debug("K5")
 
     def K6(self):
         if self.X < 100000000:
@@ -64,22 +61,16 @@ class KnuthSRNG:
             self.X = 10**10 - self.X
 
         self.next_step = self.K7
-#        self.debug("K6")
 
     def K7(self):
         self.X = 10**5 * (self.X % 10**5) + int(self.X/10**5)
 
         self.next_step = self.K8
-#        self.debug("K7")
 
     def K8(self):
-#        verbose_pre = self.verbose
-#        self.verbose = False
         self.K5()
-#        self.verbose = verbose_pre
 
         self.next_step = self.K9
-#        self.debug("K8")
 
     def K9(self):
         str_ = ""
@@ -90,7 +81,6 @@ class KnuthSRNG:
         self.X = int(str_)
 
         self.next_step = self.K10
-#        self.debug("K9")
 
     def K10(self):
         if self.X < 10**5:
@@ -99,7 +89,6 @@ class KnuthSRNG:
             self.X -= 99999
 
         self.next_step = self.K11
-#        self.debug("K10")
 
     def K11(self):
         if self.X < 10**9:
@@ -108,13 +97,11 @@ class KnuthSRNG:
         else:
             self.next_step = self.K12
 
-#        self.debug("K11")
 
     def K12(self):
         self.X = int(self.X*(self.X-1)/10**5) % 10**10
 
         self.next_step = self.K13
-#        self.debug("K12")
 
     def K13(self):
         if self.Y > 0:
@@ -122,10 +109,6 @@ class KnuthSRNG:
             self.next_step = self.K2
         else:
             self.next_step = None
-
-    def debug(self, msg):
-        if self.verbose:
-            print("{}: {}".format(msg, self.X), file=sys.stderr)
 
 
 seed = sys.argv[1]
